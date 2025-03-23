@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useQuestionnaireStore } from "@/lib/store/questionnaire";
 import { ApplicationType, ComplexityLevel } from "@/types";
 import CardSelector, { CardOption } from "../ui/CardSelector";
@@ -212,7 +212,7 @@ export default function ApplicationStep() {
   });
   
   // Configure feature toggles with their respective icons and descriptions
-  const systemCapabilities: FeatureToggle[] = [
+  const systemCapabilities: FeatureToggle[] = useMemo(()=>[
     {
       id: "hasAuthentication",
       label: "User Authentication",
@@ -261,12 +261,18 @@ export default function ApplicationStep() {
       ),
       value: application.isRealTime
     }
-  ];
+  ], [
+    // Include all dependencies that should trigger recreation
+    application.hasAuthentication,
+    application.hasFileUploads,
+    application.hasPaymentProcessing,
+    application.isRealTime
+  ]);
   
-  // Handle system capability toggle changes
-  const handleCapabilityToggle = (id: string, value: boolean) => {
+  // Memoize the callback function to prevent recreation on every render
+  const handleCapabilityToggle = useCallback((id: string, value: boolean) => {
     updateApplication(id as keyof typeof application, value);
-  };
+  }, [updateApplication]);
   
   // Handle business feature selection
   const handleBusinessFeatureToggle = (featureId: string) => {

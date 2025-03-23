@@ -30,12 +30,12 @@ export default function QuestionnairePage() {
     <>
       {/* Placeholder for QuestionnaireContainer */}
       <div className="border rounded-lg p-6 shadow-sm">
-        <p className="text-center text-muted-foreground">
-          <QuestionnaireContainer/>
+        <div className="text-center text-muted-foreground">
+          <QuestionnaireContainer/> 
           <span className="text-sm">
             (Current step: {questionnaireState.currentStep})
           </span>
-        </p>
+        </div>
       </div>
       
       {/* Development Tools - Only rendered in development environment */}

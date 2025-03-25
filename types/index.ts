@@ -45,7 +45,9 @@ export enum DataType {
   BLOB = 'blob',
   FILE = 'file',
   MULTIMEDIA = 'multimedia',
-  TIME_SERIES = 'time-series'
+  TIME_SERIES = 'time-series',
+  GRAPH = 'graph',        // Adding graph database type
+  STREAM = 'stream'
 }
 
 export enum DataAccessPattern {

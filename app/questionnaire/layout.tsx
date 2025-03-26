@@ -1,3 +1,5 @@
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
+
 export default function QuestionnaireLayout({
   children,
 }: {
@@ -6,8 +8,9 @@ export default function QuestionnaireLayout({
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <header className="py-6 px-4 border-b">
-        <div className="container mx-auto">
+        <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-2xl font-bold">CloudCompass Questionnaire</h1>
+          <ThemeToggle />
         </div>
       </header>
       

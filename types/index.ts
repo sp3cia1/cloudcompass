@@ -124,6 +124,7 @@ export interface GeographicRequirements {
 export interface SecurityRequirements {
   securityLevel: SecurityLevel;
   complianceRequirements: ComplianceType[];
+  additionalCapabilities: string[];
   requiresVPN: boolean;
   requiresWAF: boolean;
   requiresDataEncryption: boolean;
@@ -198,6 +199,7 @@ export const defaultQuestionnaireState: QuestionnaireState = {
   security: {
     securityLevel: SecurityLevel.BASIC,
     complianceRequirements: [ComplianceType.NONE],
+    additionalCapabilities: [],
     requiresVPN: false,
     requiresWAF: false,
     requiresDataEncryption: true,

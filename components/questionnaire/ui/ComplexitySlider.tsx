@@ -3,10 +3,8 @@
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ComplexityLevel } from "@/types";
-import { 
-  CircleIcon, 
-  CheckIcon 
-} from "@radix-ui/react-icons";
+import { CircleIcon, CheckIcon } from "@radix-ui/react-icons";
+import { useTheme } from "@/components/theme/ThemeProvider";
 
 // Data for complexity levels with detailed descriptions
 const complexityData = [
@@ -21,7 +19,8 @@ const complexityData = [
       "Limited integrations"
     ],
     icon: <div className="flex"><CircleIcon className="h-4 w-4" /></div>,
-    color: "bg-green-100 border-green-200"
+    lightModeColor: "bg-green-100 border-green-200 text-green-950",
+    darkModeColor: "dark:bg-green-950/30 dark:border-green-900 dark:text-green-200"
   },
   {
     level: ComplexityLevel.MODERATE,
@@ -34,7 +33,8 @@ const complexityData = [
       "Multiple third-party integrations"
     ],
     icon: <div className="flex"><CircleIcon className="h-4 w-4" /><CircleIcon className="h-4 w-4" /></div>,
-    color: "bg-blue-50 border-blue-200"
+    lightModeColor: "bg-blue-50 border-blue-200 text-blue-950",
+    darkModeColor: "dark:bg-blue-950/30 dark:border-blue-900 dark:text-blue-200"
   },
   {
     level: ComplexityLevel.COMPLEX,
@@ -47,7 +47,8 @@ const complexityData = [
       "Multiple integrated subsystems"
     ],
     icon: <div className="flex"><CircleIcon className="h-4 w-4" /><CircleIcon className="h-4 w-4" /><CircleIcon className="h-4 w-4" /></div>,
-    color: "bg-purple-50 border-purple-200"
+    lightModeColor: "bg-purple-50 border-purple-200 text-purple-950",
+    darkModeColor: "dark:bg-purple-950/30 dark:border-purple-800 dark:text-purple-200"
   }
 ];
 
@@ -62,29 +63,28 @@ export interface ComplexitySliderProps {
 export default function ComplexitySlider({
   value,
   onChange,
-  // label = "Application Complexity",
-  // description = "Select the complexity level that best describes your application",
   className
 }: ComplexitySliderProps) {
+  const { theme } = useTheme();
+  
   return (
     <div className={cn("space-y-4", className)}>
-      {/* Label and description */}
-      <div className="space-y-1">
-        {/* <h3 className="text-lg font-medium">{label}</h3>
-        <p className="text-sm text-muted-foreground">{description}</p> */}
-      </div>
-      
-      {/* Complexity cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {complexityData.map((item) => {
           const isSelected = value === item.level;
+          
           return (
             <Card 
               key={item.level}
               className={cn(
-                "relative cursor-pointer transition-all hover:border-primary/50 hover:shadow-md",
-                isSelected && "border-primary shadow-sm",
-                item.color
+                "relative cursor-pointer transition-all border-2",
+                // Use both light and dark mode classes - they'll apply automatically based on theme
+                item.lightModeColor,
+                item.darkModeColor,
+                // Selected state styling
+                isSelected ? 
+                  "border-primary shadow-md dark:border-primary" : 
+                  "hover:border-primary/50 hover:shadow-sm"
               )}
               onClick={() => onChange(item.level)}
               tabIndex={0}
@@ -111,13 +111,13 @@ export default function ComplexitySlider({
                     <CardTitle className="text-base">{item.title}</CardTitle>
                   </div>
                 </div>
-                <CardDescription className="mt-1">{item.description}</CardDescription>
+                <CardDescription className="mt-1 dark:text-muted-foreground">{item.description}</CardDescription>
               </CardHeader>
               
               <CardContent>
                 <ul className="text-sm space-y-1 list-disc pl-4">
                   {item.details.map((detail, i) => (
-                    <li key={i}>{detail}</li>
+                    <li key={i} className="dark:text-gray-300">{detail}</li>
                   ))}
                 </ul>
               </CardContent>

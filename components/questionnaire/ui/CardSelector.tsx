@@ -21,6 +21,7 @@ export interface CardSelectorProps<T> {
   label?: string;
   description?: string;
   className?: string;
+  gridClassName?: string;
 }
 
 export default function CardSelector<T>({
@@ -30,6 +31,7 @@ export default function CardSelector<T>({
   label,
   description,
   className,
+  gridClassName,
 }: CardSelectorProps<T>) {
   // Handle keyboard navigation
   const handleKeyDown = (option: CardOption<T>, e: React.KeyboardEvent) => {
@@ -50,7 +52,10 @@ export default function CardSelector<T>({
       )}
 
       {/* Card grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className={cn(
+        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4", 
+        gridClassName
+      )}>
         {options.map((option, index) => {
           const isSelected = option.value === value;
           return (

@@ -135,7 +135,8 @@ export interface BudgetRequirements {
   monthlyBudgetUSD: number;
   budgetFlexibilityPercent: number;
   prioritizeCostSavings: boolean;
-  willConsiderReservedInstances: boolean;
+  // willConsiderReservedInstances: boolean;
+  selectedOptimizationStrategies: string[]
 }
 
 // =========================================
@@ -209,7 +210,8 @@ export const defaultQuestionnaireState: QuestionnaireState = {
     monthlyBudgetUSD: 1000,
     budgetFlexibilityPercent: 10,
     prioritizeCostSavings: true,
-    willConsiderReservedInstances: false
+    // willConsiderReservedInstances: false,
+    selectedOptimizationStrategies: []
   },
   isComplete: false
 }

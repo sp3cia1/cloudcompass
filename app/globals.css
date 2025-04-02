@@ -120,3 +120,20 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes flowDash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+@keyframes flowPulse {
+  0%, 100% {
+    stroke-opacity: 0.8;
+    stroke-width: 1.5;
+  }
+  50% {
+    stroke-opacity: 1;
+    stroke-width: 2.5;
+  }
+}

@@ -32,6 +32,7 @@
     "@types/dagre": "^0.7.52",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dagre": "^0.8.5",
     "framer-motion": "^12.5.0",
     "lodash-es": "^4.17.21",
     "lottie-react": "^2.4.1",
